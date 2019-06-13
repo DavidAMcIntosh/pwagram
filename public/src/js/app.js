@@ -1,5 +1,10 @@
 let deferredPrompt;
 
+//check if the browser natively supports Promises
+if (!window.Promise) {
+    window.Promise = Promise;
+}
+
 // check if the browser supports service workers
 if ('serviceWorker' in navigator) {
     // register the service worker
@@ -7,6 +12,9 @@ if ('serviceWorker' in navigator) {
         .register('../sw.js')
         .then(() => {
             console.log('Service Worker Registered!');
+        })
+        .catch((err) => {
+            console.log(err);
         });
 }
 
